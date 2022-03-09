@@ -1,0 +1,86 @@
+@use "../rules/variables";
+@use "../components/backgroundFigure.scss" as *;
+@use "../rules/partials";
+
+.hero {
+  margin-top: 5rem;
+
+  @include variables.mq(variables.$desktop) {
+    display: flex;
+    flex-direction: row-reverse;
+    @include variables.max-width;
+  }
+
+  &-image {
+    position: relative;
+    overflow: hidden;
+    @include backgroundVector(
+      21%,
+      "right",
+      -6rem,
+      variables.$softBlue,
+      10rem 0 0 10rem
+    );
+
+    @include variables.mq(variables.$desktop) {
+      overflow: initial;
+      @include backgroundVector(
+        21%,
+        "right",
+        -24rem,
+        variables.$softBlue,
+        10rem 0 0 10rem
+      );
+    }
+  }
+  img {
+    z-index: 3;
+    width: 100%;
+    position: relative;
+  }
+  &-content {
+    text-align: center;
+    @extend .section-padding;
+    margin-top: 4rem;
+
+    @include variables.mq(variables.$desktop) {
+      max-width: 55rem;
+      & .title,
+      & .title-subtext {
+        text-align: left;
+      }
+    }
+    & .hero-btns {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1.5rem;
+
+      @include variables.mq(variables.$desktop) {
+        grid-template-columns: repeat(2, 16rem);
+        column-gap: 2rem;
+      }
+    }
+    & .btn {
+      &:nth-of-type(1) {
+        background-color: variables.$softBlue;
+        color: variables.$white;
+        box-shadow: 0 0.5rem 1rem transparentize(variables.$softBlue, 0.5);
+        &:hover {
+          background-color: transparent;
+          border: 2px solid variables.$softBlue;
+          color: variables.$softBlue;
+        }
+      }
+      &:nth-of-type(2) {
+        background-color: variables.$white;
+        box-shadow: 0 0.5rem 1rem transparentize(variables.$grayishBlue, 0.5);
+        &:hover {
+          background-color: transparent;
+          border: 2px solid rgba(0, 0, 0, 0.5);
+          color: rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
+}

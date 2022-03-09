@@ -1,0 +1,50 @@
+@use "../rules/variables" as *;
+.btn {
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  padding: 2rem 1rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  border: 2px solid transparent;
+  @include mq($desktop) {
+    padding: 1rem;
+    max-width: 16rem;
+    height: 5rem;
+  }
+
+  &-brs-1 {
+    border-radius: 5px;
+  }
+
+  &-blue {
+    background-color: $softBlue;
+    color: $white;
+    &:hover {
+      border: 2px solid $softBlue;
+      color: $softBlue;
+      background-color: transparent;
+    }
+  }
+  &-red {
+    background-color: $softRed;
+    color: $white;
+    &:hover {
+      border: 2px solid $softRed;
+      background-color: transparent;
+    }
+  }
+
+  &-transparent {
+    background-color: transparent;
+    color: $white;
+    border: 2px solid $white;
+  }
+}

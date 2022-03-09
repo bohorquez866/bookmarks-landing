@@ -1,0 +1,27 @@
+//* Colors
+$softBlue: #5368df;
+$softRed: hsl(0, 94%, 66%);
+$grayishBlue: hsl(229, 8%, 60%);
+$veryDarkBlue: hsl(229, 31%, 21%);
+$black: #000;
+$white: #fff;
+
+//* breakpoints
+$mobile: 375px;
+$desktop: 1200px;
+
+//fonts
+$fontSize: 18px;
+
+@mixin mq($breakpoint) {
+  @media only screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+@mixin max-width {
+  @include mq($desktop) {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

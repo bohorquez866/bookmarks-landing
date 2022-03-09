@@ -1,0 +1,46 @@
+@use "../rules/variables";
+
+.card {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  place-items: center;
+  padding: 2rem;
+  margin-bottom: 5rem;
+  border-radius: 20px;
+  text-align: center;
+  overflow: hidden;
+
+  @include variables.mq(variables.$desktop) {
+    width: 30rem;
+    height: fit-content;
+  }
+
+  & img {
+    margin-bottom: 2rem;
+  }
+  & p {
+    font-weight: normal;
+    font-size: 15px;
+    margin-bottom: 2rem;
+  }
+  & .btn {
+    background-color: variables.$softBlue;
+    width: 100%;
+    color: variables.$white;
+    font-size: 1.5rem;
+    box-shadow: 0 0.2rem 1rem transparentize(variables.$softBlue, 0.5);
+
+    @include variables.mq(variables.$desktop) {
+      width: 100%;
+      max-width: 100%;
+    }
+    &:hover {
+      background-color: transparent;
+      border: 2px solid variables.$softBlue;
+      color: variables.$softBlue;
+    }
+  }
+  & .dots {
+    transform: translateX(-2rem);
+    width: calc(100% + 4rem);
+  }
+}

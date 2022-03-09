@@ -1,0 +1,146 @@
+@use "../rules/variables";
+@use "../components/buttons";
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+
+  @include variables.mq(variables.$desktop) {
+    max-width: 120rem;
+    margin: 0 auto;
+  }
+  & .logo {
+    z-index: 10;
+    position: relative;
+  }
+  & .logo img {
+    height: 100%;
+    display: block;
+  }
+  & .burger-menu {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 25px;
+    z-index: 10;
+    @include variables.mq(variables.$desktop) {
+      display: none;
+    }
+
+    & span {
+      transition: all 0.5s ease-in-out;
+      height: 3px;
+      width: 25px;
+      display: block;
+      background-color: black;
+      &:not(:last-of-type) {
+        margin-bottom: 4px;
+      }
+    }
+  }
+
+  & .burger-menu.active {
+    & span {
+      &:nth-of-type(1) {
+        transform: rotate(48deg) translate(1px, 13px);
+      }
+      &:nth-of-type(2) {
+        transform: rotate(-47deg) translate(-8px, -6px);
+      }
+      &:nth-of-type(3) {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+ul.nav-links {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: transparentize(variables.$veryDarkBlue, 0.05);
+  z-index: -5;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20%;
+  align-items: center;
+  @include variables.mq(variables.$desktop) {
+    flex-direction: row;
+    opacity: 1;
+    z-index: 5;
+    background-color: initial;
+    height: initial;
+    width: initial;
+    padding-top: 0;
+    position: initial;
+    column-gap: 3rem;
+  }
+
+  & li {
+    width: 100%;
+    &.login {
+      margin-top: 2rem;
+      border: none;
+      @include variables.mq(variables.$desktop) {
+        margin-top: 0;
+      }
+
+      & a.btn {
+        @extend .btn-transparent;
+        padding: 1rem;
+        @include variables.mq(variables.$desktop) {
+          border: none;
+          background-color: variables.$softRed;
+          box-shadow: 0 0.1rem 1rem transparentize(variables.$softRed, 0.5);
+
+          display: flex;
+          width: 10rem;
+          border-radius: 5px;
+          height: 40px;
+          &:hover {
+            background-color: transparent;
+            border: 2px solid variables.$softRed;
+            color: variables.$softRed;
+          }
+        }
+      }
+    }
+  }
+  & a {
+    color: variables.$white;
+    font-size: 2.6rem;
+    font-weight: normal;
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 2rem 0;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      color: variables.$softRed;
+    }
+    &:not(.btn) {
+      border-bottom: 1px solid variables.$grayishBlue;
+    }
+    @include variables.mq(variables.$desktop) {
+      color: variables.$veryDarkBlue;
+      padding: 0;
+      font-size: inherit;
+      font-size: 14px;
+      &:not(.btn) {
+        border-bottom: none;
+      }
+    }
+  }
+  &.active {
+    transition: all 0.5s ease-in-out;
+    z-index: 5;
+    opacity: 1;
+  }
+}

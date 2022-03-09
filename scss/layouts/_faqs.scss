@@ -1,0 +1,59 @@
+@use "../rules/variables";
+
+.faqs {
+  margin-top: 4rem;
+  &,
+  & li,
+  & h3 {
+    border-top: none;
+  }
+  & h3 {
+    font-weight: normal;
+    position: relative;
+    padding: 2rem 2rem 2rem 0;
+    border-bottom: 1px solid variables.$veryDarkBlue;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    &:hover {
+      color: variables.$softRed;
+    }
+  }
+
+  & img {
+    position: absolute;
+    right: 0;
+    pointer-events: none;
+    top: calc(40% + 1px);
+    transition: transform 0.3s ease-in;
+  }
+  & .faq-head.active {
+    & img {
+      transform: rotate(180deg);
+      filter: invert(55%) sepia(19%) saturate(5692%) hue-rotate(326deg)
+        brightness(104%) contrast(109%);
+    }
+  }
+
+  & .faq-body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+  }
+}
+.faq {
+  margin-bottom: 10rem;
+  @include variables.mq(variables.$desktop) {
+    max-width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  & .btn {
+    display: grid;
+    text-align: center;
+    margin: 0 auto;
+    width: 15rem;
+    margin-top: 4rem;
+    box-shadow: 0 0.1rem 1rem transparentize(variables.$softBlue, 0.5);
+  }
+}

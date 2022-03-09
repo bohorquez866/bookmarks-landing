@@ -1,0 +1,29 @@
+@use "../rules/variables";
+@use "../components/card";
+
+.downloads {
+  margin-top: 5rem;
+  @include variables.mq(variables.$desktop) {
+    margin-top: calc(10rem + 6rem);
+    & .title-subtext {
+      max-width: 50rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .cards {
+    margin-top: 4rem;
+    @include variables.mq(variables.$desktop) {
+      display: flex;
+      column-gap: 4rem;
+      justify-content: center;
+
+      @for $i from 1 through 3 {
+        .card:nth-child(#{$i}n) {
+          margin-top: $i * 3%;
+        }
+      }
+    }
+  }
+}
