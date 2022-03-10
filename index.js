@@ -1,7 +1,22 @@
-const checkStatus = (selector) => {
-  selector.classList.contains("active")
-    ? selector.classList.remove("active")
-    : selector.classList.add("active");
+const removeAll = (els, callback) => {
+  els.forEach((el) => {
+    el.classList.remove("active");
+    callback ? callback(el) : null;
+  });
+};
+
+const checkStatus = (selector, hasClass = null, hasNoClass = null) => {
+  if (selector.classList.contains("active")) {
+    selector.classList.remove("active");
+    hasClass ? hasClass() : null;
+  } else {
+    selector.classList.add("active");
+    hasNoClass ? hasNoClass() : null;
+  }
+};
+
+const clickFirst = (el) => {
+  el ? el.click() : console.assert(el, "No element found");
 };
 
 //*navbar menu mobile
@@ -39,23 +54,17 @@ if ($featureTabHead && $featureTabContent) {
     thisElement = e.target;
 
     if (thisElement.nodeName === "SPAN") {
-      $featureTabHead.querySelectorAll("li span").forEach((el) => {
-        el.classList.remove("active");
-      });
-
-      checkStatus(thisElement);
-
       const tabClass = thisElement.classList[0];
       const $tabContent = $featureTabContent.querySelector(`.${tabClass}`);
 
-      $featureTabContent
-        .querySelectorAll("li")
-        .forEach((el) => el.classList.remove("active"));
+      removeAll($featureTabHead.querySelectorAll("li span"));
+      checkStatus(thisElement);
+      removeAll($featureTabContent.querySelectorAll("li"));
       checkStatus($tabContent);
     }
   });
 
-  $firstTab.click();
+  clickFirst($firstTab);
 }
 
 //* FAQ Section
@@ -66,28 +75,20 @@ if ($faqHeads) {
   $faqHeads.forEach((el) => {
     el.addEventListener("click", (e) => {
       thisElement = e.target;
-
-      $faqHeads.forEach((el) => {
-        el.classList.remove("active");
-      });
-
-      checkStatus(thisElement);
-
-      //* faq-body
-      document.querySelectorAll(".faqs .faq-body").forEach((el) => {
-        el.classList.remove("active");
-        el.style.maxHeight = "0";
-      });
-
+      const $faqBody = document.querySelectorAll(".faqs .faq-body");
       const $faqContent = thisElement.nextElementSibling;
 
-      if ($faqContent.classList.contains("active")) {
-        $faqContent.classList.remove("active");
-        $faqContent.style.maxHeight = "0";
-      } else {
-        $faqContent.classList.add("active");
-        $faqContent.style.maxHeight = `${$faqContent.scrollHeight}px`;
-      }
+      removeAll($faqHeads);
+      checkStatus(thisElement);
+      removeAll($faqBody, (el) => (el.style.maxHeight = "0"));
+
+      checkStatus(
+        $faqContent,
+        () => ($faqContent.style.maxHeight = "0"),
+        () => ($faqContent.style.maxHeight = `${$faqContent.scrollHeight}px`)
+      );
+
+      checkStatus($faqContent);
     });
   });
 }
